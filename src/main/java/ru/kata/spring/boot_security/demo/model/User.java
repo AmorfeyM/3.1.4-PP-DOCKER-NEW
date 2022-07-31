@@ -24,23 +24,23 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "id")
    private Long id;
 
-   @Column(name = "firstname")
+   @Column(name = "firstname", length=50)
    private String firstName;
 
-   @Column(name = "lastname")
+   @Column(name = "lastname", length=50)
    private String lastName;
 
-   @Column(name = "age")
+   @Column(name = "age", length=10)
    private int age;
 
-   @Column(name = "email", unique = true, nullable = false)
+   @Column(name = "email", unique = true, nullable = false, length=50)
    private String username;
 
-   @Column(name = "password")
+   @Column(name = "password", length=50)
    private String password;
 
    @ManyToMany(fetch = FetchType.LAZY)

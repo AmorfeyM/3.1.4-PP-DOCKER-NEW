@@ -1,0 +1,95 @@
+#создание сети
+#docker network create nameNetwork
+#
+#подключение контейнера к сети
+#docker network connect nameNetwork nameContainer
+
+#docker run -t --link mysql-container:mysql -p 8082:8082 3.1.4-pp-docker-image
+
+#version: '2'
+#
+#services:
+#      app:
+#            image: 'imranmadbar/docker-spring-boot-mysql:latest'
+#            build:
+#                  context: .
+#            container_name: app
+#            depends_on:
+#                  - db
+#            environment:
+#                  - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/dbtocrudapp
+#                  - SPRING_DATASOURCE_USERNAME=root
+#                  - SPRING_DATASOURCE_PASSWORD=1234
+#                  - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+#            links:
+#                  - "db:db"
+#
+#      db:
+#            image: 'mysql:latest'
+#            container_name: db
+#            environment:
+#                  - MYSQL_ROOT_PASSWORD=1234
+#                  - MYSQL_DATABASE=dbtocrudapp
+#
+#volumes:
+#      db:
+#            driver: local
+
+#127.0.0.1
+
+#mysqladmin -u root -p1234 shutdown
+#
+#create database dbtocrudapp;
+#use dbtocrudapp;
+#
+#CREATE TABLE `users` (
+#`id` BIGINT(8) NOT NULL AUTO_INCREMENT,
+#`firstName` VARCHAR(255) NOT NULL,
+#`lastName` VARCHAR(255) NOT NULL,
+#`age` INT(10) NOT NULL,
+#`email` VARCHAR(255) NOT NULL,
+#`password` VARCHAR(255) NOT NULL,
+#PRIMARY KEY (`id`)
+#);
+
+
+#application-docker.properties:
+#jdbc.url = jdbc:mysql://kamienica-db:3333/kamienica?useSSL=false&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+#jdbc.username = maciej
+#jdbc.password = maciej
+#hibernate.show_sql = true
+#hibernate.format_sql = true
+#hibernate.hbm2ddl.auto=create-drop
+#hibernate.dialect=org.hibernate.dialect.MySQLDialect
+#hibernate.current_session_context_class=thread
+#hibernate.connection.characterEncoding=UTF-8
+#hibernate.connection.charSet=UTF-8
+
+
+#version: '3'
+#
+#services:
+#  mysql-docker-container:
+#    image: mysql:latest
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=maciej
+#      - MYSQL_DATABASE=kamienica
+#      - MYSQL_USER=maciej
+#      - MYSQL_PASSWORD=maciej
+#    volumes:
+#      - /data/mysql
+#    ports:
+#      - 3333:3306
+#    container_name: kamienica-db
+#  kamienica-app:
+#    image: kamienica-image
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - mysql-docker-container
+#    ports:
+#      - 8080:8080
+#    volumes:
+#      - /data/spring-boot-app
+#    container_name: kamienica-app
