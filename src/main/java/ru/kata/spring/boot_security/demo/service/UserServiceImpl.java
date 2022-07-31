@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Transactional
     public void saveUser(User user) {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Transactional
@@ -50,8 +50,18 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
-
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(userRepository.getUserByEmail(username));
+        return userRepository.getUserByEmail(username);
+    }
+    @Override
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
 }
