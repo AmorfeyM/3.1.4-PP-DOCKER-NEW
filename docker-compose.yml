@@ -4,7 +4,7 @@
 #подключение контейнера к сети
 #docker network connect nameNetwork nameContainer
 
-#docker run -t --link mysql-container:mysql -p 8082:8082 3.1.4-pp-docker-image
+#docker run -t --link mysql-container:mysql -p 8082:8080 amorfeym/3.1.4-pp-docker-image
 
 #version: '2'
 #
