@@ -40,7 +40,7 @@ public class User implements UserDetails {
    @Column(name = "email", unique = true, nullable = false, length=50)
    private String username;
 
-   @Column(name = "password", length=50)
+   @Column(name = "password", length=100)
    private String password;
 
    @ManyToMany(fetch = FetchType.LAZY)
