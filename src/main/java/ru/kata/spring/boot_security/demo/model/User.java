@@ -1,12 +1,13 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -14,7 +15,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -28,17 +28,17 @@ public class User implements UserDetails {
    @Column(name = "id")
    private Long id;
 
-   @Column(name = "firstname", length=50)
+   @Column(name = "firstName", length=50)
    private String firstName;
 
-   @Column(name = "lastname", length=50)
+   @Column(name = "lastName", length=50)
    private String lastName;
 
    @Column(name = "age", length=10)
    private int age;
 
    @Column(name = "email", unique = true, nullable = false, length=50)
-   private String username;
+   private String email;
 
    @Column(name = "password", length=100)
    private String password;
@@ -56,7 +56,7 @@ public class User implements UserDetails {
    public User() {
    }
    public User(String username, String password) {
-      this.username = username;
+      this.email = username;
       this.password = password;
    }
 
@@ -67,8 +67,9 @@ public class User implements UserDetails {
 
    @Override
    public String getUsername() {
-      return username;
+      return email;
    }
+
    @Override
    @JsonIgnore
    public boolean isAccountNonExpired() {
@@ -105,16 +106,5 @@ public class User implements UserDetails {
    @Override
    public int hashCode() {
       return getClass().hashCode();
-   }
-
-   @Override
-   public String toString() {
-      return "User{" +
-              "id=" + id +
-              ", firstName='" + firstName + '\'' +
-              ", lastName='" + lastName + '\'' +
-              ", email='" + username + '\'' +
-              ", roleList=" + roles +
-              '}';
    }
 }

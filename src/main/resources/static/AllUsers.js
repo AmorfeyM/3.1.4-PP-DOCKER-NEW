@@ -4,7 +4,7 @@ $(async function() {
 const table = $('#tbodyAllUserTable');
 async function allUsers() {
     table.empty()
-    fetch("http://localhost:8080/api/users")
+    fetch("http://localhost:8082/api/users")
         .then(res => res.json())
         .then(data => {
             data.forEach(user => {
@@ -14,7 +14,7 @@ async function allUsers() {
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>   
                             <td>${user.age}</td>                      
-                            <td>${user.username}</td>
+                            <td>${user.email}</td>
                             <td>${user.roles.map(role => " " + role.name.substring(5))}</td>
                             <td>
                                 <button type="button" class="btn btn-info" data-toggle="modal" id="buttonEdit"

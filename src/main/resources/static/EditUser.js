@@ -14,7 +14,7 @@ function editUser() {
             })
         }
 
-        fetch("http://localhost:8080/api/users/" + editForm.id.value, {
+        fetch("http://localhost:8082/api/users/" + editForm.id.value, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ function editUser() {
                 firstName: editForm.firstName.value,
                 lastName: editForm.lastName.value,
                 age: editForm.age.value,
-                username: editForm.username.value,
+                email: editForm.email.value,
                 password: editForm.password.value,
                 roles: editUserRoles
             })
